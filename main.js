@@ -3,19 +3,19 @@
 
     // Objeto com operações da calculadora
     const operation = {
-        sum( n1, n2 ) {
+        "+"( n1, n2 ) {
             return n1 + n2;
         },
-        sub(n1, n2) {
+        "-"(n1, n2) {
             return n1 - n2;
         },
-        mul(n1, n2) {
+        "*"(n1, n2) {
             return n1 * n2;
         },
-        div(n1, n2) {
+        "/"(n1, n2) {
             return (n1 / n2).toFixed(1);
         },
-        mod(n1, n2) {
+        "%"(n1, n2) {
             return n1 % n2;
         }
 
@@ -23,8 +23,7 @@
 
     // verificando se o operador está presente no objeto das operações!
     const isOperatorValid = operator => {
-        let operatorValid = operator === '+' || operator === '-' || operator === '*' || operator === '/' || operator === '%' ? true : false;
-        return operatorValid;
+        return ( operation[operator] !== undefined );
     }
 
     // calculadora 
@@ -38,15 +37,15 @@
 
             switch( operator ){
                 case '+':
-                    return operation.sum(n1, n2);
+                    return operation["+"](n1, n2);
                 case '-':
-                    return operation.sub(n1, n2);
+                    return operation["-"](n1, n2);
                 case '*':
-                    return operation.mul(n1, n2);
+                    return operation["*"](n1, n2);
                 case '/':
-                    return operation.div(n1, n2);
+                    return operation["/"](n1, n2);
                 case '%':
-                    return operation.mod(n1, n2);
+                    return operation["%"](n1, n2);
             }
         }
     }
