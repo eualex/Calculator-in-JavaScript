@@ -23,30 +23,25 @@
 
     // verificando se o operador está presente no objeto das operações!
     const isOperatorValid = operator => {
-        return ( operation[operator] !== undefined );
+
+        //o "!!" é ussado para retornar o valor booleano de operation[ operator ]
+        return !!operation[ operator ]
     }
 
     // calculadora 
     const calculator = operator => {
         
-        if (isOperatorValid( operator ) === false) return false;
+        if ( !isOperatorValid( operator ) ) return false;
 
         return function( n1, n2 ) {
 
+            // verificando se os parametros n1 e n2 são do tipo number
             if ( typeof(n1) !== 'number' || typeof(n2) !== 'number') return false;
 
-            switch( operator ){
-                case '+':
-                    return operation["+"](n1, n2);
-                case '-':
-                    return operation["-"](n1, n2);
-                case '*':
-                    return operation["*"](n1, n2);
-                case '/':
-                    return operation["/"](n1, n2);
-                case '%':
-                    return operation["%"](n1, n2);
-            }
+            // retornando à função refente ao parametro operator passado, que no caso seria a operação desejada, 
+            // utilizando nessa função os parametros n1 e n2, que serão utilizados na operação! 
+            return operation[ operator ]( n1, n2 )
+            
         }
     }
 
@@ -58,15 +53,16 @@
         return `Operação "${ operator }" não permitida!`;
     }
 
-    const verifyOperation = (ope, value1, value2) => {
-        if ( ope !== false ) {
+    const verifyOperation = ( operator , value1, value2 ) => {
+        if ( operator ) {
             number1 = value1;
             number2 = value2;
-            console.log(showOperationMessage( operationSignal, number1, number2), ope( number1, number2 ) );
+            console.log(showOperationMessage( operationSignal, number1, number2), operator( number1, number2 ) );
         } else { console.log(showErrorMessage( operationSignal )); }
     }
     
-
+    
+    // OPERATIONS
     // VARIÁVEIS PARA AS OPERAÇÕES
     let number1 = 0;
     let number2 = 0;
